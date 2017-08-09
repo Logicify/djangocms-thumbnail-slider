@@ -1,0 +1,1 @@
+# djangocms-thumbnail-slider
