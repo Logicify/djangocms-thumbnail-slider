@@ -1,0 +1,18 @@
+.flexslider-carousel li {
+    margin-right: 5px;
+}
+
+.flexslider-carousel img {
+    display: block;
+    opacity: .5;
+    cursor: pointer;
+}
+
+.flexslider-carousel img:hover {
+    opacity: 1;
+}
+
+.flexslider-carousel .flex-active-slide img {
+    opacity: 1;
+    cursor: default;
+}

@@ -1,0 +1,65 @@
+{% load cms_tags %}
+{% load sekizai_tags %}
+{% load static %}
+<div class="flexslider{% if instance.additional_slider_classes %} {{ instance.additional_slider_classes }}{% endif %}"
+     id="thumbnail-slider-{{ instance.id }}">
+    <ul class="slides">
+        {% for plugin in instance.child_plugin_instances %}
+            {% render_plugin plugin %}
+        {% endfor %}
+    </ul>
+</div>
+{% if instance.enable_thumbnail_carousel %}
+    <div class="flexslider flexslider-carousel{% if instance.additional_carousel_classes %} {{ instance.additional_carousel_classes }}{% endif %}"
+         id="thumbnail-carousel-{{ instance.id }}">
+        <ul class="slides">
+            {% for plugin in instance.child_plugin_instances %}
+                {% render_plugin plugin %}
+            {% endfor %}
+        </ul>
+    </div>
+    {% addtoblock "js" %}
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('#thumbnail-carousel-{{ instance.id }}').flexslider({
+                    animation: "slide",
+                    controlNav: false,
+                    animationLoop: false,
+                    slideshow: false,
+                    itemWidth: 210,
+                    itemMargin: 5,
+                    asNavFor: '#thumbnail-slider-{{ instance.id }}'
+                });
+
+                $('#thumbnail-slider-{{ instance.id }}').flexslider({
+                    animation: "slide",
+                    controlNav: false,
+                    animationLoop: false,
+                    slideshow: false,
+                    sync: "#thumbnail-carousel-{{ instance.id }}"
+                });
+            });
+        </script>
+    {% endaddtoblock %}
+{% else %}
+    {% addtoblock "js" %}
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('#thumbnail-slider-{{ instance.id }}').flexslider({
+                    animation: "slide"
+                });
+            });
+        </script>
+    {% endaddtoblock %}
+{% endif %}
+{% addtoblock "js" %}
+    <script type="text/javascript" src="{% static "js/flexslider/jquery.flexslider-min.js" %}"></script>
+{% endaddtoblock %}
+{% addtoblock "css" %}
+    <link rel="stylesheet" href="{% static "css/flexslider/flexslider.css" %}">
+{% endaddtoblock %}
+{% if instance.enable_embedded_carousel_styles %}
+    {% addtoblock "css" %}
+        <link rel="stylesheet" href="{% static "css/flexslider/custom.flexslider.css" %}">
+    {% endaddtoblock %}
+{% endif %}
