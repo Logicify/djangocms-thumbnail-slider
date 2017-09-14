@@ -1,0 +1,11 @@
+{
+    "author": "Dmitriy Selischev",
+    "back": false,
+    "exclude": "",
+    "include": "*.py",
+    "license": "mit",
+    "program": "Django CMS Thumbnail slider",
+    "short": "Thumbnail slider plugin for Django CMS",
+    "single": true,
+    "year": "2017"
+}
