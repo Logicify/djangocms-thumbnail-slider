@@ -4,6 +4,20 @@ Thumbnail slider uses [lightslider](https://github.com/sachinchoolur/lightslider
 
 ## How to use
 
+### Requirements
+
+Installed plugins:
+
+* django-cms
+* django-sekizai
+* cmsplugin-filer
+
+UI libraries:
+
+* jQuery
+
+### Installation
+
 1. Install through the pip
 
 ```bash
