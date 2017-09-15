@@ -1,65 +1,35 @@
 {% load cms_tags %}
 {% load sekizai_tags %}
 {% load static %}
-<div class="flexslider{% if instance.additional_slider_classes %} {{ instance.additional_slider_classes }}{% endif %}"
-     id="thumbnail-slider-{{ instance.id }}">
-    <ul class="slides">
-        {% for plugin in instance.child_plugin_instances %}
+<ul id="light-slider-{{ instance.id }}"{% if instance.additional_classes %} class="{{ instance.additional_classes }}"
+{% endif %}>
+    {% for plugin in instance.child_plugin_instances %}
+        <li data-thumb="{% if plugin.image %}{{ plugin.image.url }}{% else %}{{ plugin.image_url }}{% endif %}">
             {% render_plugin plugin %}
-        {% endfor %}
-    </ul>
-</div>
-{% if instance.enable_thumbnail_carousel %}
-    <div class="flexslider flexslider-carousel{% if instance.additional_carousel_classes %} {{ instance.additional_carousel_classes }}{% endif %}"
-         id="thumbnail-carousel-{{ instance.id }}">
-        <ul class="slides">
-            {% for plugin in instance.child_plugin_instances %}
-                {% render_plugin plugin %}
-            {% endfor %}
-        </ul>
-    </div>
-    {% addtoblock "js" %}
-        <script type="text/javascript">
-            $(document).ready(function () {
-                $('#thumbnail-carousel-{{ instance.id }}').flexslider({
-                    animation: "slide",
-                    controlNav: false,
-                    animationLoop: false,
-                    slideshow: false,
-                    itemWidth: 210,
-                    itemMargin: 5,
-                    asNavFor: '#thumbnail-slider-{{ instance.id }}'
-                });
+        </li>
+    {% endfor %}
+</ul>
 
-                $('#thumbnail-slider-{{ instance.id }}').flexslider({
-                    animation: "slide",
-                    controlNav: false,
-                    animationLoop: false,
-                    slideshow: false,
-                    sync: "#thumbnail-carousel-{{ instance.id }}"
-                });
-            });
-        </script>
-    {% endaddtoblock %}
-{% else %}
-    {% addtoblock "js" %}
-        <script type="text/javascript">
-            $(document).ready(function () {
-                $('#thumbnail-slider-{{ instance.id }}').flexslider({
-                    animation: "slide"
-                });
-            });
-        </script>
-    {% endaddtoblock %}
-{% endif %}
-{% addtoblock "js" %}
-    <script type="text/javascript" src="{% static "js/flexslider/jquery.flexslider-min.js" %}"></script>
-{% endaddtoblock %}
 {% addtoblock "css" %}
-    <link rel="stylesheet" href="{% static "css/flexslider/flexslider.css" %}">
+    <link rel="stylesheet" href="{% static "lightslider/css/lightslider.min.css" %}">
 {% endaddtoblock %}
-{% if instance.enable_embedded_carousel_styles %}
-    {% addtoblock "css" %}
-        <link rel="stylesheet" href="{% static "css/flexslider/custom.flexslider.css" %}">
-    {% endaddtoblock %}
-{% endif %}
+
+{% addtoblock "js" %}
+    <script type="text/javascript" src="{% static "lightslider/js/lightslider.min.js" %}"></script>
+{% endaddtoblock %}
+
+{% addtoblock "js" %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#light-slider-{{ instance.id }}").lightSlider({
+                item: {{ instance.items_on_slider }},
+                gallery: {{ instance.enable_thumbnail_carousel | yesno:"true,false" }},
+                addClass: '{{ instance.slide_classes }}',
+                {% if instance.enable_thumbnail_carousel %}
+                    thumbItem: {{ instance.thumbnail_items }},
+                    vThumbWidth: {{ instance.thumbnail_width }}
+                {% endif %}
+            });
+        });
+    </script>
+{% endaddtoblock %}
