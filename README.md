@@ -1,6 +1,6 @@
 # djangocms-thumbnail-slider
 
-Thumbnail slider using [lightslider](https://github.com/sachinchoolur/lightslider) inside (under [MIT License](https://github.com/sachinchoolur/lightslider/blob/master/README.md#mit--sachin))
+Thumbnail slider uses [lightslider](https://github.com/sachinchoolur/lightslider) inside (under [MIT License](https://github.com/sachinchoolur/lightslider/blob/master/README.md#mit--sachin))
 
 ## How to use
 
