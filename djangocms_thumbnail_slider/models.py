@@ -29,6 +29,8 @@ from django.db import models
 class ThumbnailSlider(CMSPlugin):
     enable_thumbnail_carousel = models.BooleanField(blank=False, null=False, default=False)
     items_on_slider = models.IntegerField(blank=True, null=False, default=1)
+    loop = models.BooleanField(default=False)
+    auto_play = models.BooleanField(default=False)
     additional_classes = models.CharField(blank=True, null=False, max_length=255, default='')
     slide_classes = models.CharField(blank=True, null=False, max_length=255, default='')
     thumbnail_width = models.IntegerField(blank=True, null=False, default=100)

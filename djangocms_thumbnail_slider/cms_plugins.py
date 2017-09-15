@@ -39,14 +39,18 @@ class ThumbnailSliderPlugin(CMSPluginBase):
         (None, {
             'fields': [
                 'enable_thumbnail_carousel',
-                'items_on_slider'
+                'items_on_slider',
+                'auto_play',
+                'loop'
             ]
         }),
         (_("Advanced settings"), {
             'classes': ('collapse',),
             'fields': [
-                ('additional_classes', 'slide_classes'),
-                ('thumbnail_width', 'thumbnail_items')
+                'additional_classes',
+                'slide_classes',
+                'thumbnail_width',
+                'thumbnail_items'
             ]
         })
     )

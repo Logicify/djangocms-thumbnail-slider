@@ -25,6 +25,8 @@
                 item: {{ instance.items_on_slider }},
                 gallery: {{ instance.enable_thumbnail_carousel | yesno:"true,false" }},
                 addClass: '{{ instance.slide_classes }}',
+                auto: {{ instance.auto_play | yesno:"true,false" }},
+                loop: {{ instance.loop | yesno:"true,false" }},
                 {% if instance.enable_thumbnail_carousel %}
                     thumbItem: {{ instance.thumbnail_items }},
                     vThumbWidth: {{ instance.thumbnail_width }}
