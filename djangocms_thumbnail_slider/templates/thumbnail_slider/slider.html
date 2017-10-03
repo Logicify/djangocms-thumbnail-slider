@@ -1,0 +1,37 @@
+{% load cms_tags %}
+{% load sekizai_tags %}
+{% load static %}
+<ul id="light-slider-{{ instance.id }}"{% if instance.additional_classes %} class="{{ instance.additional_classes }}"
+{% endif %}>
+    {% for plugin in instance.child_plugin_instances %}
+        <li data-thumb="{% if plugin.image %}{{ plugin.image.url }}{% else %}{{ plugin.image_url }}{% endif %}">
+            {% render_plugin plugin %}
+        </li>
+    {% endfor %}
+</ul>
+
+{% addtoblock "css" %}
+    <link rel="stylesheet" href="{% static "lightslider/css/lightslider.min.css" %}">
+{% endaddtoblock %}
+
+{% addtoblock "js" %}
+    <script type="text/javascript" src="{% static "lightslider/js/lightslider.min.js" %}"></script>
+{% endaddtoblock %}
+
+{% addtoblock "js" %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#light-slider-{{ instance.id }}").lightSlider({
+                item: {{ instance.items_on_slider }},
+                gallery: {{ instance.enable_thumbnail_carousel | yesno:"true,false" }},
+                addClass: '{{ instance.slide_classes }}',
+                auto: {{ instance.auto_play | yesno:"true,false" }},
+                loop: {{ instance.loop | yesno:"true,false" }},
+                {% if instance.enable_thumbnail_carousel %}
+                    thumbItem: {{ instance.thumbnail_items }},
+                    vThumbWidth: {{ instance.thumbnail_width }}
+                {% endif %}
+            });
+        });
+    </script>
+{% endaddtoblock %}
