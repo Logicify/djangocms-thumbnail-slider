@@ -24,7 +24,7 @@ UI libraries:
 pip install djangocms-thumbnail-slider
 ```
 
-2. Add `djangocms_thumbnail_slider` to your `INSTALLER_APPS` setting
+2. Add `djangocms_thumbnail_slider` to your `INSTALLED_APPS` setting
 
 3. Enjoy thumbnail slider in placeholder
 
